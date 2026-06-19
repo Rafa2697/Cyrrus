@@ -1,0 +1,7 @@
+{
+  "name": "Cyrrus",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
