@@ -1,21 +1,27 @@
 import { Routes } from '@angular/router';
+import { redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
+import { authGuard, guestGuard } from './service/auth.guard';
 
 export const routes: Routes = [
-  {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
   },
   {
+    path: 'home',
+    loadComponent: () => import('./home/home.page').then((m) => m.HomePage)
+  },
+  {
     path: 'auth',
-    loadComponent: () => import('./pages/auth/auth.page').then( m => m.AuthPage)
+    loadComponent: () => import('./pages/auth/auth.page').then( m => m.AuthPage),
+    canActivate: [guestGuard],
+    data: {authGuardPipe: redirectLoggedInTo(['/home-users'])}
   },
   {
     path: 'home-users',
-    loadComponent: () => import('./pages/home-users/home-users.page').then( m => m.HomeUsersPage)
+    loadComponent: () => import('./pages/home-users/home-users.page').then( m => m.HomeUsersPage),
+    canActivate: [authGuard],
+    data: {authGuardPipe: redirectUnauthorizedTo(['/auth'])}
   },
 ];
