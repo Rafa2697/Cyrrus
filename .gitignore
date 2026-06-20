@@ -34,6 +34,9 @@ log.txt
 npm-debug.log
 yarn-error.log
 
+# Environment files (local secrets/config)
+/src/environments/*
+
 # IDEs and editors
 .idea/
 .project
