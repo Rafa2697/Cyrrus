@@ -20,6 +20,7 @@ export interface Child {
   cartao_saude: number;
   nome_responsavel: string;
   sexo: string;
+  vacinas?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -46,17 +47,6 @@ export class DatabaseService {
       })
     );
   }
-
-  /** Busca única (uma vez) */
-  // async getChildrenOnce(): Promise<Child[]> {
-  //   const ref = collection(this.firestore, 'children');
-  //   const snapshot = await getDocs(ref);
-
-  //   return snapshot.docs.map(doc => ({
-  //     id: doc.id,
-  //     ...doc.data(),
-  //   })) as Child[];
-  // }
 
 
   async addChild(child: Omit<Child, 'id'>): Promise<void> {
