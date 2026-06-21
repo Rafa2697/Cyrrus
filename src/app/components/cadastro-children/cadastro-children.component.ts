@@ -21,6 +21,8 @@ import {
 import { addIcons } from 'ionicons';
 import { add, close } from 'ionicons/icons';
 import { Child, DatabaseService } from '../../service/database';
+import { firstValueFrom } from 'rxjs';
+import { AuthService } from '../../service/auth';
 
 @Component({
   selector: 'app-cadastro-children',
@@ -46,8 +48,10 @@ import { Child, DatabaseService } from '../../service/database';
     IonSelectOption,
   ],
 })
+
 export class CadastroChildrenComponent {
   private database = inject(DatabaseService);
+  private authService = inject(AuthService)
 
   isModalOpen = false;
   saving = false;
@@ -75,6 +79,8 @@ export class CadastroChildrenComponent {
     this.saving = true;
 
     try {
+      const currentUser = await firstValueFrom(this.authService.user$);
+      this.child.email_user = currentUser?.email || '';
       await this.database.addChild(this.child);
       this.closeModal();
     } catch (error) {

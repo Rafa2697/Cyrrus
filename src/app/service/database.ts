@@ -4,9 +4,11 @@ import {
   addDoc,
   collection,
   collectionData,
-  getDocs,
+  query,
+  where,
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
+import { AuthService } from '../../app/service/auth';
 
 export interface Child {
   id: string;
@@ -23,23 +25,39 @@ export interface Child {
 @Injectable({ providedIn: 'root' })
 export class DatabaseService {
   private firestore = inject(Firestore);
+  private authService = inject(AuthService);
+
+  
 
   /** Busca em tempo real (atualiza quando a coleção muda) */
   getChildren$(): Observable<Child[]> {
-    const ref = collection(this.firestore, 'children');
-    return collectionData(ref, { idField: 'id' }) as Observable<Child[]>;
+    return this.authService.user$.pipe(
+      switchMap(user => {
+        if (!user?.email) {
+          return new Observable<Child[]>(subscriber => subscriber.next([]));
+        }
+
+        const ref = query(
+          collection(this.firestore, 'children'),
+          where('email_user', '==', user.email)
+        );
+
+        return collectionData(ref, { idField: 'id' }) as Observable<Child[]>;
+      })
+    );
   }
 
   /** Busca única (uma vez) */
-  async getChildrenOnce(): Promise<Child[]> {
-    const ref = collection(this.firestore, 'children');
-    const snapshot = await getDocs(ref);
+  // async getChildrenOnce(): Promise<Child[]> {
+  //   const ref = collection(this.firestore, 'children');
+  //   const snapshot = await getDocs(ref);
 
-    return snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-    })) as Child[];
-  }
+  //   return snapshot.docs.map(doc => ({
+  //     id: doc.id,
+  //     ...doc.data(),
+  //   })) as Child[];
+  // }
+
 
   async addChild(child: Omit<Child, 'id'>): Promise<void> {
     const ref = collection(this.firestore, 'children');
