@@ -1,28 +1,25 @@
-<div style="padding: 20px; font-family: sans-serif;">
-  <h1>Bem-vindo ao Cyrrus</h1>
-
-  <!-- Verifica se o usuário está logado -->
+<div class="dados-user ion-padding">
   @if (authService.user$ | async; as user) {
-    <div style="border: 1px solid #ccc; padding: 15px; border-radius: 8px; width: fit-content;">
-      <!-- Exibe a foto de perfil do Google -->
-      <img [src]="user.photoURL" alt="Foto de perfil" style="border-radius: 50%; width: 50px; height: 50px;" />
-      <h3>Olá, {{ user.displayName }}!</h3>
-      <p>E-mail: {{ user.email }}</p>
-      
-      <!-- Botão para deslogar -->
-      <button (click)="authService.logout()" style="background-color: #ff4d4d; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;">
-        Sair
-      </button>
-    </div>
+    <ion-item lines="none" class="user-info">
+      <ion-avatar slot="start">
+        <img [src]="user.photoURL" [alt]="user.displayName ?? 'Foto de perfil'" />
+      </ion-avatar>
+      <ion-label>
+        <h2>Olá, {{ user.displayName }}!</h2>
+        <p>{{ user.email }}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-button expand="block" color="danger" fill="outline" (click)="authService.logout()">
+      Sair
+    </ion-button>
   } @else {
-    <div>
-      <p>Você não está conectado.</p>
-      <!-- Botão para logar com o Google -->
-      <button (click)="authService.loginWithGoogle()" style="background-color: #4285F4; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;">
-        Entrar com o Google
-      </button>
-    </div>
+    <ion-text color="medium">
+      <p class="guest-message">Você não está conectado.</p>
+    </ion-text>
+
+    <ion-button expand="block" color="primary" (click)="authService.loginWithGoogle()">
+      Entrar com o Google
+    </ion-button>
   }
 </div>
-Sem resposta
->

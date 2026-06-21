@@ -1,0 +1,112 @@
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button (click)="openModal()" aria-label="Cadastrar criança">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Nova criança</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeModal()">
+            <ion-icon slot="icon-only" name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <form (ngSubmit)="save()">
+        <ion-item>
+          <ion-input
+            label="Nome"
+            labelPlacement="stacked"
+            name="nome"
+            [(ngModel)]="child.nome"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            label="Idade"
+            labelPlacement="stacked"
+            type="number"
+            name="idade"
+            [(ngModel)]="child.idade"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            label="CPF"
+            labelPlacement="stacked"
+            type="number"
+            name="cpf"
+            [(ngModel)]="child.cpf"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            label="Nome do responsável"
+            labelPlacement="stacked"
+            name="nome_responsavel"
+            [(ngModel)]="child.nome_responsavel"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            label="CPF do responsável"
+            labelPlacement="stacked"
+            type="number"
+            name="cpf_responsavel"
+            [(ngModel)]="child.cpf_responsavel"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            label="E-mail"
+            labelPlacement="stacked"
+            type="email"
+            name="email_user"
+            [(ngModel)]="child.email_user"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            label="Cartão de saúde"
+            labelPlacement="stacked"
+            type="number"
+            name="cartao_saude"
+            [(ngModel)]="child.cartao_saude"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-select
+            label="Sexo"
+            labelPlacement="stacked"
+            name="sexo"
+            [(ngModel)]="child.sexo"
+            placeholder="Selecione"
+          >
+            <ion-select-option value="Masculino">Masculino</ion-select-option>
+            <ion-select-option value="Feminino">Feminino</ion-select-option>
+            <ion-select-option value="Outro">Outro</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-button expand="block" type="submit" [disabled]="saving || !child.nome.trim()">
+          {{ saving ? 'Salvando...' : 'Salvar' }}
+        </ion-button>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
 
 import { DadosUserComponent } from './dados-user.component';
 
@@ -9,8 +8,7 @@ describe('DadosUserComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DadosUserComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [DadosUserComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DadosUserComponent);

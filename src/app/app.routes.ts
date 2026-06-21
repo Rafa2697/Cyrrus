@@ -24,4 +24,11 @@ export const routes: Routes = [
     canActivate: [authGuard],
     data: {authGuardPipe: redirectUnauthorizedTo(['/auth'])}
   },
+  {
+    path: 'children',
+    loadComponent: () => import('./pages/children/children.page').then( m => m.ChildrenPage),
+    canActivate: [authGuard],
+    data: {authGuardPipe: redirectUnauthorizedTo(['/auth'])}
+  }
+
 ];
