@@ -11,12 +11,13 @@ import {
   IonIcon,
   IonInput,
   IonItem,
-  IonLabel,
+  IonNote,
   IonModal,
   IonSelect,
   IonSelectOption,
   IonTitle,
   IonToolbar,
+  
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { add, close } from 'ionicons/icons';
@@ -45,7 +46,7 @@ import { AuthService } from '../../service/auth';
     IonItem,
     IonInput,
     IonSelect,
-    IonSelectOption,
+    IonSelectOption
   ],
 })
 
@@ -93,7 +94,7 @@ export class CadastroChildrenComponent {
   private createEmptyChild(): Omit<Child, 'id'> {
     return {
       nome: '',
-      idade: 0,
+      data_de_nascimento: null,
       cpf: 0,
       cpf_responsavel: 0,
       email_user: '',
