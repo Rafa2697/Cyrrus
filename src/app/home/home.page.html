@@ -1,4 +1,4 @@
-<ion-header [translucent]="true" class="ion-no-border">
+<ion-header class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-title style="font-weight: 700; font-size: 1.5rem; letter-spacing: 1px;">
       <ion-icon name="cloud-outline" style="vertical-align: middle; margin-right: 5px;"></ion-icon>
@@ -13,13 +13,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" color="light">
+<ion-content color="light">
   <div id="container">
     
-    <div class="hero-section ion-text-center ion-padding" style="background: var(--ion-color-primary); color: white; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; margin-bottom: 20px;">
-      <h1 style="font-weight: bold; font-size: 2rem;">Bem-vindo ao Cyrrus</h1>
-      <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Acompanhe as campanhas de vacinação da sua região de forma fácil e rápida.</p>
-    </div>
+    <ion-card class="hero-section ion-text-center ion-padding" color="primary" style="margin: 0 0 20px 0; width: 100%; border-radius: 0 0 30px 30px; box-shadow: none;">
+      <ion-card-header>
+        <ion-card-title style="font-weight: bold; font-size: 2rem; color: white;">Bem-vindo ao Cyrrus</ion-card-title>
+      </ion-card-header>
+      <ion-card-content style="font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: white;">
+        Acompanhe as campanhas de vacinação da sua região de forma fácil e rápida.
+      </ion-card-content>
+    </ion-card>
 
     <app-campanhas></app-campanhas>
 
