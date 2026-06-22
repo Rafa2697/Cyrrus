@@ -1,24 +1,33 @@
 <div class="dados-user ion-padding">
   @if (authService.user$ | async; as user) {
-    <ion-item lines="none" class="user-info">
-      <ion-avatar slot="start">
-        <img [src]="user.photoURL" [alt]="user.displayName ?? 'Foto de perfil'" />
-      </ion-avatar>
-      <ion-label>
-        <h2>Olá, {{ user.displayName }}!</h2>
-        <p>{{ user.email}}</p>
-      </ion-label>
-    </ion-item>
+    <ion-card class="ion-no-margin ion-margin-bottom">
+      <ion-card-content>
+        <ion-item lines="none" class="user-info" style="--padding-start: 0; --inner-padding-end: 0;">
+          <ion-avatar slot="start" style="width: 64px; height: 64px;">
+            <img [src]="user.photoURL" [alt]="user.displayName ?? 'Foto de perfil'" />
+          </ion-avatar>
+          <ion-label>
+            <h2 style="font-weight: 600; font-size: 1.2rem; color: var(--ion-color-dark);">Olá, {{ user.displayName }}!</h2>
+            <p style="color: var(--ion-color-medium);">{{ user.email}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
 
-    <ion-button expand="block" color="danger" fill="outline" (click)="authService.logout()">
+    <ion-button expand="block" color="danger" fill="outline" shape="round" (click)="authService.logout()">
+      <ion-icon name="log-out-outline" slot="start"></ion-icon>
       Sair
     </ion-button>
   } @else {
-    <ion-text color="medium">
-      <p class="guest-message">Você não está conectado.</p>
-    </ion-text>
+    <div class="ion-text-center ion-padding ion-margin-bottom">
+      <ion-icon name="person-circle-outline" style="font-size: 4rem; color: var(--ion-color-medium);"></ion-icon>
+      <ion-text color="medium">
+        <p class="guest-message">Você não está conectado.</p>
+      </ion-text>
+    </div>
 
-    <ion-button expand="block" color="primary" (click)="authService.loginWithGoogle()">
+    <ion-button expand="block" color="primary" shape="round" (click)="authService.loginWithGoogle()">
+      <ion-icon name="logo-google" slot="start"></ion-icon>
       Entrar com o Google
     </ion-button>
   }

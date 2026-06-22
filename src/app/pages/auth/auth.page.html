@@ -1,13 +1,21 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
     <ion-title>Autenticação</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div style="padding: 20px; font-family: sans-serif;">
-    <h1>Bem-vindo ao Cyrrus</h1>
-    <app-login></app-login>
+<ion-content [fullscreen]="true" color="light">
+  <div class="auth-container">
+    <ion-card class="ion-padding" style="width: 100%; max-width: 400px; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+      <div class="ion-text-center ion-margin-bottom">
+        <ion-icon name="cloud-outline" style="font-size: 4rem; color: var(--ion-color-primary);"></ion-icon>
+        <h1 style="font-weight: bold; color: var(--ion-color-dark);">Cyrrus</h1>
+        <p style="color: var(--ion-color-medium);">Faça login para continuar</p>
+      </div>
+      <app-login></app-login>
+    </ion-card>
   </div>
-
 </ion-content>

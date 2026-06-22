@@ -1,2 +1,42 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+:root {
+  /** primary **/
+  --ion-color-primary: #abc270;
+  --ion-color-primary-rgb: 171, 194, 112;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #96aa62;
+  --ion-color-primary-tint: #b4c87e;
+
+  /** secondary **/
+  --ion-color-secondary: #fda769;
+  --ion-color-secondary-rgb: 253, 167, 105;
+  --ion-color-secondary-contrast: #000000;
+  --ion-color-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-secondary-shade: #df935c;
+  --ion-color-secondary-tint: #fdb078;
+
+  /** tertiary **/
+  --ion-color-tertiary: #fec868;
+  --ion-color-tertiary-rgb: 254, 200, 104;
+  --ion-color-tertiary-contrast: #000000;
+  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
+  --ion-color-tertiary-shade: #dfb05b;
+  --ion-color-tertiary-tint: #fece77;
+
+  /** dark **/
+  --ion-color-dark: #473c33;
+  --ion-color-dark-rgb: 71, 60, 51;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #3e352d;
+  --ion-color-dark-tint: #594f47;
+
+  /* Global typography */
+  --ion-font-family: 'Outfit', sans-serif;
+  
+  /* Text color defaults to the dark brown for a warmer feel */
+  --ion-text-color: var(--ion-color-dark);
+}

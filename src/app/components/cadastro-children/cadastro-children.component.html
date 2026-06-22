@@ -1,5 +1,5 @@
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-  <ion-fab-button (click)="openModal()" aria-label="Cadastrar criança">
+  <ion-fab-button color="primary" (click)="openModal()" aria-label="Cadastrar criança">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>
@@ -7,7 +7,7 @@
 <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
   <ng-template>
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar color="secondary">
         <ion-title>Nova criança</ion-title>
         <ion-buttons slot="end">
           <ion-button (click)="closeModal()">
@@ -18,21 +18,25 @@
     </ion-header>
 
     <ion-content class="ion-padding">
-      <form (ngSubmit)="save()">
-        <ion-item>
+      <form (ngSubmit)="save()" class="ion-margin-top">
+        <ion-item lines="none" class="ion-margin-bottom">
           <ion-input
+          class="input-custom"
             label="Nome"
-            labelPlacement="stacked"
+            labelPlacement="floating"
+            fill="outline"
             name="nome"
             [(ngModel)]="child.nome"
             required
           ></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item lines="none" class="ion-margin-bottom">
           <ion-input
+          class="input-custom"
             label="Data de nascimento"
-            labelPlacement="stacked"
+            labelPlacement="floating"
+            fill="outline"
             type="date"
             name="data_de_nascimento"
             [(ngModel)]="child.data_de_nascimento"
@@ -40,49 +44,59 @@
           ></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item lines="none" class="ion-margin-bottom">
           <ion-input
+          class="input-custom"
             label="CPF"
-            labelPlacement="stacked"
+            labelPlacement="floating"
+            fill="outline"
             type="number"
             name="cpf"
             [(ngModel)]="child.cpf"
           ></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item lines="none" class="ion-margin-bottom">
           <ion-input
+          class="input-custom"
             label="Nome do responsável"
-            labelPlacement="stacked"
+            labelPlacement="floating"
+            fill="outline"
             name="nome_responsavel"
             [(ngModel)]="child.nome_responsavel"
           ></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item lines="none" class="ion-margin-bottom">
           <ion-input
+          class="input-custom"
             label="CPF do responsável"
-            labelPlacement="stacked"
+            labelPlacement="floating"
+            fill="outline"
             type="number"
             name="cpf_responsavel"
             [(ngModel)]="child.cpf_responsavel"
           ></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item lines="none" class="ion-margin-bottom">
           <ion-input
+          class="input-custom"
             label="Cartão de saúde"
-            labelPlacement="stacked"
+            labelPlacement="floating"
+            fill="outline"
             type="number"
             name="cartao_saude"
             [(ngModel)]="child.cartao_saude"
           ></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item lines="none" class="ion-margin-bottom">
           <ion-select
+          class="input-custom"
             label="Sexo"
-            labelPlacement="stacked"
+            labelPlacement="Stacked label"
+            fill="outline"
             name="sexo"
             [(ngModel)]="child.sexo"
             placeholder="Selecione"
@@ -93,9 +107,12 @@
           </ion-select>
         </ion-item>
 
-        <ion-button expand="block" type="submit" [disabled]="saving || !child.nome.trim()">
-          {{ saving ? 'Salvando...' : 'Salvar' }}
-        </ion-button>
+        <div class="ion-padding-top">
+          <ion-button expand="block" shape="round" type="submit" [disabled]="saving || !child.nome.trim()">
+            <ion-icon name="save-outline" slot="start"></ion-icon>
+            {{ saving ? 'Salvando...' : 'Salvar Cadastro' }}
+          </ion-button>
+        </div>
       </form>
     </ion-content>
   </ng-template>

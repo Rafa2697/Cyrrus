@@ -1,22 +1,44 @@
-<h1>Campanhas</h1>
+<div class="container">
+  <ion-text color="primary">
+    <h1 class="ion-padding-start">Campanhas</h1>
+  </ion-text>
 
-<!-- Enquanto carrega -->
-@if (campanhas$ | async; as campanhas) {
-  
-  @for (campanha of campanhas; track campanha.id) {
-    <div>
-      <h2>{{ campanha.titulo }}</h2>
-      <p>{{ campanha.descricao }}</p>
-      <p>
-        De {{campanha.inicio.toDate() | date: 'dd/MM/yyyy'}} 
-        Até {{campanha.fim.toDate() | date: 'dd/MM/yyyy'}}
-      </p>
-      <!-- Adicione outros campos da sua Campanha -->
+  <!-- Enquanto carrega -->
+  @if (campanhas$ | async; as campanhas) {
+    
+    @for (campanha of campanhas; track campanha.id) {
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title color="secondary">{{ campanha.titulo }}</ion-card-title>
+        </ion-card-header>
+        
+        <ion-card-content>
+          <p>{{ campanha.descricao }}</p>
+          
+          <ion-item lines="none" class="ion-margin-top" style="--background: transparent; --padding-start: 0;">
+            <ion-icon name="calendar-outline" slot="start" color="tertiary"></ion-icon>
+            <ion-label>
+              <h3>Período</h3>
+              <p>
+                De {{campanha.inicio.toDate() | date: 'dd/MM/yyyy'}} <br/>
+                Até {{campanha.fim.toDate() | date: 'dd/MM/yyyy'}}
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    } @empty {
+      <div class="ion-text-center ion-padding">
+        <ion-text color="medium">
+          <p>Nenhuma campanha encontrada.</p>
+        </ion-text>
+      </div>
+    }
+
+  } @else {
+    <div class="ion-text-center ion-padding">
+      <ion-spinner color="primary"></ion-spinner>
+      <p>Carregando campanhas...</p>
     </div>
-  } @empty {
-    <p>Nenhuma campanha encontrada.</p>
   }
-
-} @else {
-  <p>Carregando campanhas...</p>
-}
+</div>
