@@ -1,0 +1,22 @@
+<h1>Campanhas</h1>
+
+<!-- Enquanto carrega -->
+@if (campanhas$ | async; as campanhas) {
+  
+  @for (campanha of campanhas; track campanha.id) {
+    <div>
+      <h2>{{ campanha.titulo }}</h2>
+      <p>{{ campanha.descricao }}</p>
+      <p>
+        De {{campanha.inicio.toDate() | date: 'dd/MM/yyyy'}} 
+        Até {{campanha.fim.toDate() | date: 'dd/MM/yyyy'}}
+      </p>
+      <!-- Adicione outros campos da sua Campanha -->
+    </div>
+  } @empty {
+    <p>Nenhuma campanha encontrada.</p>
+  }
+
+} @else {
+  <p>Carregando campanhas...</p>
+}

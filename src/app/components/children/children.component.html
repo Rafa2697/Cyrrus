@@ -4,118 +4,117 @@
       <ion-title>Crianças</ion-title>
     </ion-toolbar>
   </ion-header>
-  
+
   <ion-content class="ion-padding">
     <div class="container">
       <div *ngFor="let child of children" class="card" (click)="openChildDetails(child)" id="child-{{ child.id }}">
         {{ child.nome }}
       </div>
     </div>
+    
+      <ion-modal #modal [isOpen]="isModalOpen" [presentingElement]="presentingElement" (didDismiss)="closeModal()">
+        <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Detalhes de {{selectedChild?.nome}}</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="closeModal()"><ion-icon slot="icon-only" name="close"></ion-icon></ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
 
-    <ion-modal #modal [isOpen]="isModalOpen" [presentingElement]="presentingElement" (didDismiss)="closeModal()">
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Detalhes da Criança</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="closeModal()">Fechar</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      
-      <ion-content class="ion-padding" *ngIf="selectedChild">
-        <ion-item>
-          <ion-label>
-            <h2>Nome</h2>
-            <p>{{ selectedChild.nome }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h2>Nascimento</h2>
-            <p>{{ selectedChild.data_de_nascimento.toDate() | date: 'dd/MM/yyyy' }} </p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h2>Sexo</h2>
-            <p>{{ selectedChild.sexo }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h2>CPF</h2>
-            <p>{{ selectedChild.cpf }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h2>Cartão de Saúde</h2>
-            <p>{{ selectedChild.cartao_saude }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h2>Responsável</h2>
-            <p>{{ selectedChild.nome_responsavel }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h2>CPF do Responsável</h2>
-            <p>{{ selectedChild.cpf_responsavel }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>
-            <h2>Email</h2>
-            <p>{{ selectedChild.email_user }}</p>
-          </ion-label>
-        </ion-item>
-
-        <div class="vacinacao-section ion-margin-top">
-          <ion-list-header style="--background: transparent; padding-inline-start: 0;">
-            <ion-label color="primary" style="font-size: 1.2rem; font-weight: bold;">
-              Carteira de Vacinação
+        <ion-content class="ion-padding" *ngIf="selectedChild">
+          <ion-item>
+            <ion-label>
+              <h2>Nome</h2>
+              <p>{{ selectedChild.nome }}</p>
             </ion-label>
-          </ion-list-header>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h2>Nascimento</h2>
+              <p>{{ selectedChild.data_de_nascimento.toDate() | date: 'dd/MM/yyyy' }} </p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h2>Sexo</h2>
+              <p>{{ selectedChild.sexo }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h2>CPF</h2>
+              <p>{{ selectedChild.cpf }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h2>Cartão de Saúde</h2>
+              <p>{{ selectedChild.cartao_saude }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h2>Responsável</h2>
+              <p>{{ selectedChild.nome_responsavel }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h2>CPF do Responsável</h2>
+              <p>{{ selectedChild.cpf_responsavel }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h2>Email</h2>
+              <p>{{ selectedChild.email_user }}</p>
+            </ion-label>
+          </ion-item>
 
-          <ion-list *ngIf="vacinas$ | async as listaVacinas; else carregando" lines="each">
-            
-            <ion-item *ngFor="let vacina of listaVacinas">
-              <ion-label>
-                <h2>{{ vacina.nome_vacina === '/vacinas/nome' ? 'Vacina Cadastrada' : vacina.nome_vacina }}</h2>
-                <p>Previsão: {{ vacina.data_prevista.toDate() | date: 'dd/MM/yyyy' }}</p>
+          <div class="vacinacao-section ion-margin-top">
+            <ion-list-header style="--background: transparent; padding-inline-start: 0;">
+              <ion-label color="primary" style="font-size: 1.2rem; font-weight: bold;">
+                Carteira de Vacinação
               </ion-label>
+            </ion-list-header>
 
-              <ion-button
-                slot="end"
-                fill="outline"
-                size="small"
-                color="primary"
-                (click)="toggleVaccineStatus(vacina)">
-                {{ vacina.status ? 'Marcar Pendente' : 'Marcar Aplicada' }}
-              </ion-button>
-              <ion-badge slot="end" [color]="vacina.status ? 'success' : 'warning'" style="margin-left: 0.5rem;">
-                {{ vacina.status ? 'Aplicada' : 'Pendente' }}
-              </ion-badge>
-            </ion-item>
+            <ion-list *ngIf="vacinas$ | async as listaVacinas; else carregando" lines="each">
 
-            <ion-item *ngIf="listaVacinas.length === 0">
-              <ion-label class="ion-text-center">
-                <p>Nenhuma vacina gerada para esta criança.</p>
-              </ion-label>
-            </ion-item>
+              <ion-item *ngFor="let vacina of listaVacinas">
+                <ion-label>
+                  <h2>{{ vacina.nome_vacina === '/vacinas/nome' ? 'Vacina Cadastrada' : vacina.nome_vacina }}</h2>
+                  <p>Previsão: {{ vacina.data_prevista.toDate() | date: 'dd/MM/yyyy' }}</p>
+                </ion-label>
 
-          </ion-list>
+                <ion-button slot="end" fill="outline" size="small" color="primary"
+                  (click)="toggleVaccineStatus(vacina)">
+                  {{ vacina.status ? 'Marcar Pendente' : 'Marcar Aplicada' }}
+                </ion-button>
+                <ion-badge slot="end" [color]="vacina.status ? 'success' : 'warning'" style="margin-left: 0.5rem;">
+                  {{ vacina.status ? 'Aplicada' : 'Pendente' }}
+                </ion-badge>
+              </ion-item>
 
-          <ng-template #carregando>
-            <div class="ion-text-center ion-padding">
-              <ion-note>Buscando vacinas no banco...</ion-note>
-            </div>
-          </ng-template>
-        </div>
+              <ion-item *ngIf="listaVacinas.length === 0">
+                <ion-label class="ion-text-center">
+                  <p>Nenhuma vacina gerada para esta criança.</p>
+                </ion-label>
+              </ion-item>
 
-      </ion-content>
-    </ion-modal>
+            </ion-list>
+
+            <ng-template #carregando>
+              <div class="ion-text-center ion-padding">
+                <ion-note>Buscando vacinas no banco...</ion-note>
+              </div>
+            </ng-template>
+          </div>
+
+        </ion-content>
+        </ng-template>
+      </ion-modal>
+    
   </ion-content>
 </div>

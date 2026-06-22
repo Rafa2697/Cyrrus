@@ -37,6 +37,16 @@ export interface Child {
   sexo: string;
 }
 
+export interface Campanha {
+  id?: string;
+  titulo: string;
+  descricao: string;
+  inicio: Timestamp;
+  fim: Timestamp;
+  idade_alvo_min_meses: number;
+  idade_alvo_max_meses: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class DatabaseService {
   private firestore = inject(Firestore);
@@ -72,7 +82,7 @@ export class DatabaseService {
     return updateDoc(vaccineDocRef, { status });
   }
 
-  /** FUNÇÃO ATUALIZADA: Cria a criança E já gera o histórico de vacinas dela automaticamente */
+  /**  Cria a criança E já gera o histórico de vacinas dela automaticamente */
   async addChild(child: Omit<Child, 'id'>): Promise<void> {
     // Converte data_de_nascimento para Timestamp se necessário
     let dataNascimentoTimestamp: Timestamp;
@@ -129,5 +139,12 @@ export class DatabaseService {
 
     // 4. Executa o lote inteiro no banco de dados
     await batch.commit();
+  }
+
+
+  //busca coleções de campanhas
+  getCampanhas$(): Observable<Campanha[]> {
+    const ref = collection(this.firestore, 'campanha');
+    return collectionData(ref, { idField: 'id' }) as Observable<Campanha[]>;
   }
 }

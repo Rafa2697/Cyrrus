@@ -13,15 +13,14 @@ import {
   IonTitle,
   IonToolbar,
   IonList,
-  IonBadge, IonNote, IonListHeader } from '@ionic/angular/standalone';
+  IonBadge, IonNote, IonListHeader, IonIcon } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-children-list',
   templateUrl: './children.component.html',
   styleUrls: ['./children.component.scss'],
   standalone: true,
-  // Adicionei IonList e IonBadge nos imports para usarmos no HTML das vacinas
-  imports: [IonListHeader, IonNote, 
+  imports: [IonIcon, IonListHeader, IonNote, 
     CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, 
     IonItem, IonLabel, IonButtons, IonButton, IonModal, IonList, IonBadge
   ],
