@@ -13,20 +13,27 @@ import {
   IonTitle,
   IonToolbar,
   IonList,
-  IonBadge, IonNote, IonListHeader, IonIcon } from '@ionic/angular/standalone';
+  IonBadge, IonListHeader, IonIcon, IonCard, IonCardContent, IonSpinner,
+  IonGrid, IonRow, IonCol, IonCardHeader, IonCardTitle, IonCardSubtitle } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { peopleCircleOutline, personOutline, calendarOutline, maleFemaleOutline, idCardOutline, medkitOutline, peopleOutline, mailOutline, shieldCheckmarkOutline, close } from 'ionicons/icons';
 
 @Component({
   selector: 'app-children-list',
   templateUrl: './children.component.html',
   styleUrls: ['./children.component.scss'],
   standalone: true,
-  imports: [IonIcon, IonListHeader, IonNote, 
+  imports: [IonIcon, IonListHeader, IonCard, IonCardContent, IonSpinner,
+    IonGrid, IonRow, IonCol, IonCardHeader, IonCardTitle, IonCardSubtitle,
     CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, 
-    IonItem, IonLabel, IonButtons, IonButton, IonModal, IonList, IonBadge
-  ],
+    IonItem, IonLabel, IonButtons, IonButton, IonModal, IonList, IonBadge]
 })
 export class ChildrenComponent implements OnInit {
   private database = inject(DatabaseService);
+
+  constructor() {
+    addIcons({ peopleCircleOutline, personOutline, calendarOutline, maleFemaleOutline, idCardOutline, medkitOutline, peopleOutline, mailOutline, shieldCheckmarkOutline, close });
+  }
 
   @ViewChild('modal') modal!: IonModal;
 

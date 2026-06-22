@@ -6,15 +6,20 @@ import {
   IonItem,
   IonLabel,
   IonText,
+  IonIcon,
+  IonCard,
+  IonCardContent
 } from '@ionic/angular/standalone';
 import { AuthService } from '../../service/auth';
+import { addIcons } from 'ionicons';
+import { logOutOutline, personCircleOutline, logoGoogle } from 'ionicons/icons';
 
 @Component({
   selector: 'app-dados-user',
   templateUrl: './dados-user.component.html',
   styleUrls: ['./dados-user.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonAvatar, IonButton, IonItem, IonLabel, IonText],
+  imports: [CommonModule, IonAvatar, IonButton, IonItem, IonLabel, IonText, IonIcon, IonCard, IonCardContent],
 })
 export class DadosUserComponent {
   protected authService = inject(AuthService);

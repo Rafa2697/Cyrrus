@@ -20,7 +20,7 @@ import {
   
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { add, close } from 'ionicons/icons';
+import { add, close, saveOutline } from 'ionicons/icons';
 import { Child, DatabaseService } from '../../service/database';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from '../../service/auth';
@@ -60,7 +60,7 @@ export class CadastroChildrenComponent {
   child: Omit<Child, 'id'> = this.createEmptyChild();
 
   constructor() {
-    addIcons({ add, close });
+    addIcons({ add, close, saveOutline });
   }
 
   openModal(): void {
